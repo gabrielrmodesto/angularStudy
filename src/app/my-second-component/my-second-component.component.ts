@@ -9,6 +9,7 @@ export class MySecondComponentComponent implements OnInit {
 	nome = 'Gabriel';
 	isVisible = true;
 	myValue = 4;
+	myList = [1,2,3,4,5];
 	aluno = {
 		dados: {
 			nome: ''
