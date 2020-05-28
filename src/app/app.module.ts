@@ -1,0 +1,16 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+
+import { AppComponent } from './app.component';
+import { MyComponent } from './my-component/my-component.component';
+import { MySecondComponentComponent } from './my-second-component/my-second-component.component';
+
+@NgModule({
+	declarations: [AppComponent, MyComponent, MySecondComponentComponent],
+	imports: [BrowserModule, AppRoutingModule],
+	providers: [],
+	bootstrap: [AppComponent],
+})
+export class AppModule {}
