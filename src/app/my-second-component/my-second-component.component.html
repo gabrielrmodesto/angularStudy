@@ -19,9 +19,8 @@
 
 <div><button (click)="handleClick()">click</button></div>
 
-
 <div>
-	<select (change)="0" #minhaClasse>
+	<select (change)="(0)" #minhaClasse>
 		<option value="1">Classe 1</option>
 		<option value="2">Classe 2</option>
 		<option value="3">Classe 3</option>
@@ -34,12 +33,23 @@
 	[class.classe3]="minhaClasse.value == 3"
 	[class.classeMaior]="minhaClasse.value > 1"
 	[style.display]="minhaClasse.value > 1 ? 'block' : 'none'"
->Minha Classe</div>
+>
+	Minha Classe
+</div>
 
-<hr>
+<hr />
 
 <div>
 	<ul>
-		<li *ngFor="let aluno of alunos">Nome: {{ aluno.nome }} </li>
+		<li *ngFor="let aluno of alunos">Nome: {{ aluno.nome }}</li>
+	</ul>
+</div>
+
+<hr />
+
+<div>
+	<input type="text" [(ngModel)]="searchText" (keyup.enter)="getProjects()" />
+	<ul>
+		<li *ngFor="let project of projects">Name: {{ project.full_name }}</li>
 	</ul>
 </div>
