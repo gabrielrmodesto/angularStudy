@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlunosService } from '../services/alunos.service';
 
 @Component({
 	selector: 'app-my-second-component',
@@ -15,7 +16,11 @@ export class MySecondComponentComponent implements OnInit {
 			nome: '',
 		},
 	};
-	constructor() {}
+	alunos = [];
+
+	constructor(private alunoService : AlunosService) {
+		this.alunos = this.alunoService.getAlunos();
+	}
 
 	ngOnInit(): void {}
 

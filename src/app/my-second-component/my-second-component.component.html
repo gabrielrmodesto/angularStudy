@@ -35,3 +35,11 @@
 	[class.classeMaior]="minhaClasse.value > 1"
 	[style.display]="minhaClasse.value > 1 ? 'block' : 'none'"
 >Minha Classe</div>
+
+<hr>
+
+<div>
+	<ul>
+		<li *ngFor="let aluno of alunos">Nome: {{ aluno.nome }} </li>
+	</ul>
+</div>
