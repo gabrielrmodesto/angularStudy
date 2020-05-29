@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlunosService } from '../services/alunos.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 interface GithubResponse {
 	incomplete_results: boolean;
@@ -39,9 +39,12 @@ export class MySecondComponentComponent implements OnInit {
 
 	getProjects() {
 		if (this.searchText) {
+
 			const url = `https://api.github.com/search/repositories`;
 			const params = new HttpParams().set('q',this.searchText);
-			this.http.get<GithubResponse>(url, {params}).subscribe((response) => {
+			const headers = new HttpHeaders().set('Content-type', 'text/html');
+
+			this.http.get<GithubResponse>(url, {params, headers}).subscribe((response) => {
 				this.projects = response.items;
 			});
 		}
