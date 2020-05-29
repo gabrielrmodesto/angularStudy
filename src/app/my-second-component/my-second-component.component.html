@@ -1,4 +1,8 @@
-<p *ngIf="isVisible">{{ aluno?.dados?.nome }}</p>
+<p *ngIf="isVisible">{{ nome }}</p>
+
+<div>
+	<input type="text" [value]="nome" (input)="nome = $event.target.value" />
+</div>
 
 <div [ngSwitch]="myValue">
 	<span *ngSwitchCase="1">Valor 1</span>
