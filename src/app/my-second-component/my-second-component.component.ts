@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlunosService } from '../services/alunos.service';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { ProjectsService } from '../services/projects.service';
 
-interface GithubResponse {
-	incomplete_results: boolean;
-	items: any[];
-	total_count: number;
-}
 @Component({
 	selector: 'app-my-second-component',
 	templateUrl: './my-second-component.component.html',
@@ -27,26 +22,23 @@ export class MySecondComponentComponent implements OnInit {
 	searchText = '';
 	projects = [];
 
-	constructor(private alunoService: AlunosService, private http: HttpClient) {
+	constructor(
+		private alunoService: AlunosService,
+		private projectsService: ProjectsService
+	) {
 		this.alunos = this.alunoService.getAlunos();
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.projectsService.projects.subscribe((projects) => {
+			this.projects = projects;
+		});
+	}
 
 	handleClick() {
 		alert('Hi');
 	}
-
 	getProjects() {
-		if (this.searchText) {
-
-			const url = `https://api.github.com/search/repositories`;
-			const params = new HttpParams().set('q',this.searchText);
-			const headers = new HttpHeaders().set('Content-type', 'text/html');
-
-			this.http.get<GithubResponse>(url, {params, headers}).subscribe((response) => {
-				this.projects = response.items;
-			});
-		}
+		this.projectsService.getProjects(this.searchText);
 	}
 }
