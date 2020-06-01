@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlunosService } from '../services/alunos.service';
 import { ProjectsService } from '../services/projects.service';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-my-second-component',
 	templateUrl: './my-second-component.component.html',
 	styleUrls: ['./my-second-component.component.css'],
 })
-export class MySecondComponentComponent implements OnInit {
+export class MySecondComponentComponent implements OnInit, OnDestroy {
+	isAlive = true;
 	nome = 'Gabriel';
 	isVisible = true;
 	myValue = 4;
@@ -30,9 +32,14 @@ export class MySecondComponentComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.projectsService.projects.subscribe((projects) => {
-			this.projects = projects;
-		});
+		this.projectsService.projects
+			.pipe(takeWhile(() => this.isAlive))
+			.subscribe((projects) => {
+				this.projects = projects;
+			});
+	}
+	ngOnDestroy(): void {
+		this.isAlive = false;
 	}
 
 	handleClick() {
